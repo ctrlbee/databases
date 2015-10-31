@@ -37,9 +37,10 @@
 
 #select * from messages inner join users on messages.users_id = users.id
 
-select * from users;
+select * from messages;
 
 #insert into rooms (roomname) values ('Hello')
 
+#SELECT m.text, r.roomname, u.username FROM messages m inner JOIN rooms r on r.id=m.room_id inner JOIN users u on u.id=m.users_id
 
 
