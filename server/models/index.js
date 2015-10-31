@@ -1,4 +1,4 @@
-var db = require('../db');
+var db = require('../db'); /// ???
 
 module.exports = {
   messages: {
@@ -8,8 +8,20 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function () {},
-    post: function () {}
+    get: function (username, cb) {
+      db.connect();
+      db.query("SELECT username FROM users WHERE username='" + username +"';", function(err, rows, fields) {
+        cb(err, rows);
+      });      
+      db.end();
+    },
+    post: function (username, cb) {
+      db.connect(); 
+      db.query("INSERT INTO users (username) values ('" +username+ "');", function(err, rows, fields) {
+        cb(err, rows);
+      })
+      db.end(); 
+    }
   }
 };
 

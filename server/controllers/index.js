@@ -1,4 +1,5 @@
 var models = require('../models');
+var url = require('url'); 
 
 module.exports = {
   messages: {
@@ -8,8 +9,32 @@ module.exports = {
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {}
+    get: function (req, res) {
+      var parsed = url.parse(req.url, true);
+      //console.log(parsed);
+      models.users.get(parsed.query.username, function(err, data) {
+        sendResponse(res, err, data);
+      });
+    },
+    post: function (req, res) {
+      var postBody = req.body.username; 
+      console.log(req.body); 
+      console.log(postBody); 
+      models.users.post(postBody, function(err, data){
+
+        sendResponse(res, err, 201);
+      });
+    }
+  }
+};
+
+
+
+function sendResponse(res, err, userData) {
+  if (err) {
+    console.log("OH N0 " + err);
+  } else {
+    res.send(userData);
   }
 };
 
