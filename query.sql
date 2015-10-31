@@ -35,8 +35,11 @@
 
 #insert into messages (text, users_id, room_id) values ('hello there', 1, 1)
 
-select * from messages inner join users on messages.users_id = users.id
+#select * from messages inner join users on messages.users_id = users.id
 
+select * from users;
+
+#insert into rooms (roomname) values ('Hello')
 
 
 
